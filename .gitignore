@@ -1,0 +1,8 @@
+objs/
+Debug/
+src/bak/
+*.user
+*.opensdf
+*.sdf
+*.suo
+*.pdb
