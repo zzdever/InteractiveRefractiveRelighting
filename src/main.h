@@ -143,7 +143,7 @@ int mode = 0;
 bool barycenter = false;
 //bool operation_block = false;
 
-glm::vec3 eye(0.0f, 7.0f, 7.0f);
+glm::vec3 eye(0.0f, 7.0f, 0.0f);
 glm::vec3 center(0.0f, 0.0f, 0.0f);
 float zNear = 0.001;
 float zFar = 10000.0;
@@ -151,12 +151,12 @@ glm::mat4 projection = glm::perspective(60.0f, (float)(W_WIDTH) / (float)(W_HEIG
 glm::mat4 model = glm::mat4();
 glm::mat4 view = glm::lookAt(eye, center, glm::vec3(0, 1, 0));
 glm::mat4 modelview = view * glm::mat4();
-glm::vec3 lightpos = glm::vec3(0.0f, 7.0f, 0.0f);
+glm::vec3 lightpos = glm::vec3(-10.0f, 7.0f, 0.0f);
 glm::vec3 light_radiance = glm::vec3(1.0f, 1.0f, 1.0f);
 
 //Make the camera move on the surface of sphere
 float vPhi = 0.0f;
-float vTheta = 3.14105926f / 4.0f;
+float vTheta = 3.14105926f / 2.0f;
 float R = glm::length(eye);
 
 // world params

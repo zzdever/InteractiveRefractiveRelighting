@@ -54,7 +54,122 @@ vec3 GaussianBlur( sampler2D tex0, vec2 centreUV, vec2 halfPixelOffset, vec2 pix
 }                                                                                                                                                                    
 
 
-                                                                                                                                             
+
+
+
+
+
+           
+vec4 rgb_to_hsl (vec4 rgb)
+{
+  float maxx, minn, delta;
+
+
+  maxx = max(rgb.x, max(rgb.y, rgb.z));
+  minn = min(rgb.x, min(rgb.y, rgb.z));
+
+  vec4 hsl = vec4(0.,0.,0.,0.);
+
+  hsl.z = (maxx + minn) / 2.0;
+
+  if (maxx == minn)
+    {
+      hsl.y = 0.0;
+      hsl.x = -1.0;
+    }
+  else
+    {
+      if (hsl.z <= 0.5)
+        hsl.y = (maxx - minn) / (maxx + minn);
+      else
+        hsl.y = (maxx - minn) / (2.0 - maxx - minn);
+
+      delta = maxx - minn;
+
+      if (delta == 0.0)
+        delta = 1.0;
+
+      if (rgb.x == maxx)
+        {
+          hsl.x = (rgb.y - rgb.z) / delta;
+        }
+      else if (rgb.y == maxx)
+        {
+          hsl.x = 2.0 + (rgb.z - rgb.x) / delta;
+        }
+      else
+        {
+          hsl.x = 4.0 + (rgb.x - rgb.y) / delta;
+        }
+
+      hsl.x /= 6.0;
+
+      if (hsl.x < 0.0)
+        hsl.x += 1.0;
+    }
+
+  hsl.w = rgb.w;
+
+  return hsl;
+}                                                                                                                                  
+
+
+
+
+float hsl_value (float n1,
+                float n2,
+                float hue)
+{
+  float val;
+
+  if (hue > 6.0)
+    hue -= 6.0;
+  else if (hue < 0.0)
+    hue += 6.0;
+
+  if (hue < 1.0)
+    val = n1 + (n2 - n1) * hue;
+  else if (hue < 3.0)
+    val = n2;
+  else if (hue < 4.0)
+    val = n1 + (n2 - n1) * (4.0 - hue);
+  else
+    val = n1;
+
+  return val;
+}
+
+vec4 hsl_to_rgb (vec4 hsl)
+{
+  vec4 rgb = vec4(0.,0.,0.,0.);
+
+  if (hsl.y == 0.)
+    {
+      /*  achromatic case  */
+      rgb.x = hsl.z;
+      rgb.y = hsl.z;
+      rgb.z = hsl.z;
+    }
+  else
+    {
+      float m1, m2;
+
+      if (hsl.z <= 0.5)
+        m2 = hsl.z * (1.0 + hsl.y);
+      else
+        m2 = hsl.z + hsl.y - hsl.z * hsl.y;
+
+      m1 = 2.0 * hsl.z - m2;
+
+      rgb.x = hsl_value (m1, m2, hsl.x * 6.0 + 2.0);
+      rgb.y = hsl_value (m1, m2, hsl.x * 6.0);
+      rgb.z = hsl_value (m1, m2, hsl.x * 6.0 - 2.0);
+    }
+
+  rgb.w = hsl.w;
+
+  return rgb;
+}
 
 
 
@@ -104,7 +219,7 @@ void main (void){
       texelSize = 1.0 / vec2(textureSize(meshRadianceTex, 0));
       vec2 screenCoords = gl_FragCoord.xy * texelSize;
       //frag_color += texture(meshRadianceTex, screenCoords); 
-      frag_color += 0.1*vec4(GaussianBlur(meshRadianceTex, screenCoords, vec2(0,0), texelSize), 1.0); 
+      frag_color += 0.4*vec4(GaussianBlur(meshRadianceTex, screenCoords, vec2(0,0), texelSize), 1.0); 
 
    } 
    else if (is_transparent_mesh_fs) {
@@ -114,20 +229,19 @@ void main (void){
       //vec4 color = texture(meshColorTex, screenCo ords);
       vec4 color = vec4(GaussianBlur(meshColorTex, screenCoords, vec2(0,0), texelSize), 1.0);
 
-      vec4 color2 = texture(meshRadianceTex, screenCoords); 
-      //frag_color = color + 0.01*vec4(GaussianBlur(meshRadianceTex, screenCoords, vec2(0,0), texelSize), 1.0); 
-      frag_color = color + 0.02*color2;
-
-
-      /*
-      if((fs_meshpos-fs_bounding_min).y > (fs_bounding_max - fs_bounding_min).y / 4.0)
-        color = vec4(0.0314,0.1059,0.6941,1.0);
+      //vec4 radiance = texture(meshRadianceTex, screenCoords); 
+      vec4 radiance = vec4(GaussianBlur(meshRadianceTex, screenCoords, vec2(0,0), texelSize), 1.0);
+      vec4 color2;
+      if((fs_meshpos-fs_bounding_min).y > (fs_bounding_max - fs_bounding_min).y / 4.7)
+        color2 = vec4(0.0314,0.1059,0.6941,1.0);
       else
-        color = vec4(0.8549,0.3137,0.0784,1.0);
-      vec4 Iamb = color;
-      vec4 Idiff = color * max(dot(fs_normal,L), 0.0);
-      Idiff = clamp(Idiff, 0.0, 1.0);
-      */
+        color2 = vec4(0.8549,0.3137,0.0784,1.0);
+      vec4 color2_hsl = rgb_to_hsl(color2);
+      color2_hsl.z += 0.1*(radiance.x + radiance.y + radiance.z) / 3.0;
+      color2 = hsl_to_rgb(color2_hsl);
+      //frag_color = color + 0.01*vec4(GaussianBlur(meshRadianceTex, screenCoords, vec2(0,0), texelSize), 1.0); 
+      frag_color = color*0.95 + color2*0.05;
+
       vec4 Ispec = color * pow(max(dot(R, E), 0.0), 2.0 * 4.0);
       Ispec = clamp(Ispec, 0.0, 1.0);
 

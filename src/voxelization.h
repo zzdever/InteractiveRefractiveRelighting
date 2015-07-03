@@ -57,7 +57,7 @@ struct Photon{
 	float direction[3]; // also serves as v
 	float residual_radiance[3]; // rgb radiance. this also serves as screen coordinate when marching view rays
 	//float is_dead; // deprecated, just exit the while loop if it is dead
-#define DEBUG_PATH
+//#define DEBUG_PATH
 #ifdef DEBUG_PATH
 	float iteration_count;
 #endif

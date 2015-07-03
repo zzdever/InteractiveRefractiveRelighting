@@ -24,8 +24,6 @@
     <ClInclude Include="..\..\..\src\main.h" />
     <ClInclude Include="..\..\..\src\main_inline.h" />
     <ClInclude Include="..\..\..\src\photon_inline.h" />
-    <ClInclude Include="..\..\..\src\rasterizeKernels.h" />
-    <ClInclude Include="..\..\..\src\rasterizeTools.h" />
     <ClInclude Include="..\..\..\src\sceneStructs.h" />
     <ClInclude Include="..\..\..\src\timingUtils.h" />
     <ClInclude Include="..\..\..\src\utilities.h" />
@@ -44,7 +42,6 @@
   <ItemGroup>
     <CudaCompile Include="..\..\..\external\src\voxelpipe\compact_ranges.cu" />
     <CudaCompile Include="..\..\..\external\src\voxelpipe\utils.cu" />
-    <CudaCompile Include="..\..\..\src\rasterizeKernels.cu" />
     <CudaCompile Include="..\..\..\src\timingUtils.cu" />
     <CudaCompile Include="..\..\..\src\voxelization.cu" />
   </ItemGroup>

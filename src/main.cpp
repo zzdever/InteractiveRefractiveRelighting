@@ -3,8 +3,8 @@
 #include "commoninclude.h"
 #include "photon.h"
 
-string path_prefix = "C:\\Users\\ying\\Desktop\\Dynamic-Refractive-Relighting\\windows\\";
-//string path_prefix = "../../";
+//string path_prefix = "C:\\Users\\ying\\Desktop\\Dynamic-Refractive-Relighting\\windows\\";
+string path_prefix = "../../";
 
 
 int main(int argc, char** argv){
@@ -15,27 +15,17 @@ int main(int argc, char** argv){
 
 	bool loadedScene = false;
 
-	int choice = 2;
-	cout << "Please type which scene to load? '1'(dragon), '2'(2 cows), '3'(all_three), '4'(cow), '5'(bunny), '6'(cube), '7'(twoballs)." << endl;
+	int choice = 1;
+	cout << "Please type which scene to load? '1'(two balls), '2'(bunny)." << endl;
 	cout << "Press ENTER after the number input :)\n" << endl;
-	cin >> choice;
+	//cin >> choice;
 
 	string local_path = path_prefix + "../objs/";
-	string data = local_path + "2cows.obj";
+	string data = local_path + "twoballs.obj";
 	if (choice == 1)
-		data = local_path + "dragon_tex.obj";
-	else if (choice == 2)
-		data = local_path + "2cows.obj";
-	else if (choice == 3)
-		data = local_path + "all_three.obj";
-	else if (choice == 4)
-		data = local_path + "cow_tex.obj";
-	else if (choice == 5)
-		data = local_path + "bunny.obj";
-	else if (choice == 6)
-		data = local_path + "mycube.obj";
-	else if (choice == 7)
 		data = local_path + "twoballs.obj";
+	else if (choice == 2)
+		data = local_path + "bunny.obj";
 
 	mesh = new obj();
 	objLoader* loader = new objLoader(data, mesh);
@@ -50,10 +40,16 @@ int main(int argc, char** argv){
 	SetCudaSideParams(boundingBoxMin, boundingBoxMax);
 	OnStarting_Voxel();
 
+	// Pre-added internals. These can be added interactively.
+	if (choice == 1) {
+		selectedInternal.push_back(glm::vec3(1.4658, 2.3178, 1.5732) + glm::vec3(boundingBoxExpand / 2.0, boundingBoxExpand / 2.0, boundingBoxExpand / 2.0));
+		selectedInternal.push_back(glm::vec3(2.4636, 0.405, 2.295) + glm::vec3(boundingBoxExpand / 2.0, boundingBoxExpand / 2.0, boundingBoxExpand / 2.0));
+	}
+	else if (choice == 2) {
+		selectedInternal.push_back(glm::vec3(1.8156, 1.2288, 1.8822) + glm::vec3(boundingBoxExpand / 2.0, boundingBoxExpand / 2.0, boundingBoxExpand / 2.0));
+	}
 
-	selectedInternal.push_back(glm::vec3(1.4658, 2.3178, 1.5732) + glm::vec3(boundingBoxExpand / 2.0, boundingBoxExpand / 2.0, boundingBoxExpand / 2.0));
-	selectedInternal.push_back(glm::vec3(2.4636, 0.405, 2.295) + glm::vec3(boundingBoxExpand / 2.0, boundingBoxExpand / 2.0, boundingBoxExpand / 2.0));
-
+	
 	frame = 0;
 	seconds = time(NULL);
 	fpstracker = 0;

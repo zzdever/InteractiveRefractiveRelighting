@@ -424,7 +424,7 @@ void deleteTexture(GLuint* tex){
 }
 
 void shut_down(int return_code){
-	kernelCleanup();
+	//ying kernelCleanup();
 	cudaDeviceReset();
 #ifdef __APPLE__
 	glfwTerminate();
@@ -768,7 +768,7 @@ void runCuda() {
 	}
 
 	cudaGLMapBufferObject((void**)&dptr, pbo);
-	cudaRasterizeCore(dptr, glm::vec2(W_WIDTH, W_HEIGHT), rotationM, frame, vbo, vbosize, cbo, cbosize, ibo, ibosize, nbo, nbosize, &tex, texcoord, eye, center, view, lightpos, mode, barycenter);
+	//ying cudaRasterizeCore(dptr, glm::vec2(W_WIDTH, W_HEIGHT), rotationM, frame, vbo, vbosize, cbo, cbosize, ibo, ibosize, nbo, nbosize, &tex, texcoord, eye, center, view, lightpos, mode, barycenter);
 	cudaGLUnmapBufferObject(pbo);
 
 	vbo = NULL;

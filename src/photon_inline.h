@@ -108,7 +108,7 @@ __host__ void initCudaSideTexture(GLuint background_tex)
 
 
 
-#define N_COEFFICIENT (8.0)
+#define N_COEFFICIENT (4.0)
 
 /*
 __host__ inline float CalculateRefractive(float x, float y, float z)
@@ -124,7 +124,7 @@ return (x*x + y*y) / N_COEFFICIENT + 1.0;
 }  */
 
 #ifdef QUADRATIC_N
-#define CalculateRefractive(x,y,z) (((x)*(x) + (y)*(y)) / N_COEFFICIENT + 1.0)
+#define CalculateRefractive(x,y,z) (-((x)*(x) + (y)*(y)) / N_COEFFICIENT + 5.0)
 /*
 #define CalculateRefractive(x,y,z) \
  ((((x)-4.45665)*((x)-4.45665) + ((y)-3.9382) * ((y)-3.9382) + ((z)-4.57365) * ((z)-4.57365)) <  0.9*0.9) ?	\
@@ -492,8 +492,8 @@ __device__ int MapIntersectionToEnvMap(float3 coord, float world_size, float3 wo
 
 #define GetGradient(gradient, x, y, z) \
 {\
-	(gradient)[0] = 2 * (x) / N_COEFFICIENT; \
-	(gradient)[1] = 2 * (y) / N_COEFFICIENT; \
+	(gradient)[0] = -2 * (x) / N_COEFFICIENT; \
+	(gradient)[1] = -2 * (y) / N_COEFFICIENT; \
 	(gradient)[2] = 0; \
 }
 
@@ -539,7 +539,7 @@ return coord;
 
 
 
-#define DEBUG_PATH_CONDITION (id == 277)
+#define DEBUG_PATH_CONDITION (0)
 #define TIMING_CONDITION (0)
 
 
