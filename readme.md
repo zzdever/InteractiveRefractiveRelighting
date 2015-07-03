@@ -2,16 +2,16 @@ Implementation of paper "Interactive Relighting of Dynamic Refractive Objects" [
 
 =====
 
-![bunny] (doc/bunnyres.png?raw=true)
+![bunny] (doc/bunnyres.PNG?raw=true)
 
-![ball1] (doc/ball1.png?raw=true)
+![ball1] (doc/ball1.PNG?raw=true)
 
-![ball2] (doc/ball2.png?raw=true)
+![ball2] (doc/ball2.PNG?raw=true)
 
-![ball3] (doc/ball3.png?raw=true)
+![ball3] (doc/ball3.PNG?raw=true)
 
-![ball4] (doc/ball4.png?raw=true)
+![ball4] (doc/ball4.PNG?raw=true)
 
-![ball5] (doc/ball5.png?raw=true)
+![ball5] (doc/ball5.PNG?raw=true)
 
 
