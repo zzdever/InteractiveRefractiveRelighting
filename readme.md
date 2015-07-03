@@ -2,26 +2,16 @@ Implementation of paper "Interactive Relighting of Dynamic Refractive Objects" [
 
 =====
 
-<div style="margin:0 auto;; width:70%; z-index:-1">    
-<img src="./doc/bunnyres.png" height="100%" width="100%"/>    
-</div> 
+![bunny](/doc/bunnyres.png)
 
-<div style="margin:0 auto;; width:70%; z-index:-1">    
-<img src="./doc/ball1.png" height="100%" width="100%"/>    
-</div> 
+![ball1](/doc/ball1.png)
 
-<div style="margin:0 auto;; width:70%; z-index:-1">    
-<img src="./doc/ball2.png" height="100%" width="100%"/>    
-</div> 
+![ball2](/doc/ball2.png)
 
-<div style="margin:0 auto;; width:70%; z-index:-1">    
-<img src="./doc/ball3.png" height="100%" width="100%"/>    
-</div> 
+![ball3](/doc/ball3.png)
 
-<div style="margin:0 auto;; width:70%; z-index:-1">    
-<img src="./doc/ball4.png" height="100%" width="100%"/>    
-</div> 
+![ball4](/doc/ball4.png)
 
-<div style="margin:0 auto;; width:70%; z-index:-1">    
-<img src="./doc/ball5.png" height="100%" width="100%"/>    
-</div> 
+![ball5](/doc/ball5.png)
+
+
