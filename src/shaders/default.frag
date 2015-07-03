@@ -53,12 +53,6 @@ vec3 GaussianBlur( sampler2D tex0, vec2 centreUV, vec2 halfPixelOffset, vec2 pix
     return colOut;                                                                                                                                                   
 }                                                                                                                                                                    
 
-
-
-
-
-
-
            
 vec4 rgb_to_hsl (vec4 rgb)
 {

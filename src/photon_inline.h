@@ -110,28 +110,10 @@ __host__ void initCudaSideTexture(GLuint background_tex)
 
 #define N_COEFFICIENT (4.0)
 
-/*
-__host__ inline float CalculateRefractive(float x, float y, float z)
-{
-#ifdef LINEAR
-return fabs(y);
-#endif
-
-#define CIRCLE
-#ifdef CIRCLE
-return (x*x + y*y) / N_COEFFICIENT + 1.0;
-#endif
-}  */
 
 #ifdef QUADRATIC_N
 #define CalculateRefractive(x,y,z) (-((x)*(x) + (y)*(y)) / N_COEFFICIENT + 5.0)
-/*
-#define CalculateRefractive(x,y,z) \
- ((((x)-4.45665)*((x)-4.45665) + ((y)-3.9382) * ((y)-3.9382) + ((z)-4.57365) * ((z)-4.57365)) <  0.9*0.9) ?	\
-	 ((((x)-4.45665)*((x)-4.45665) + ((y)-3.9382) * ((y)-3.9382) + ((z)-4.57365) * ((z)-4.57365)) / N_COEFFICIENT + 1.0) : \
-	 ((((x)-5.57505)*((x)-5.57505) + ((y)-2.1220) * ((y)-2.1220) + ((z)-5.33565) * ((z)-5.33565)) / N_COEFFICIENT + 1.0)
-//(((x)-5.57505)*((x)-5.57505) + ((y)-2.122) * ((y)-2.122) + ((z)-5.33565) * ((z)-5.33565)) <  0.60*0.60) ?
-*/
+
 #endif
 
 #ifdef CONSTANT_N
@@ -184,6 +166,7 @@ __global__ void ReadInExtinction(int threads, Node* origin, int dim, float grid_
 
 }
 
+/*
 //#define DEBUG_GRADIENT
 #define DEBUG_GRADIENT_CONDITION (id==2333)
 
@@ -246,6 +229,7 @@ __global__ void StoreGradientInMipmap(int threads, Voxel* mesh_voxels, Node* ori
 
 }
 
+*/
 
 
 __global__ void CreateMipmapOtherLevels(int threads, Node* origin, Node* origin_pre, int dim, float grid_size_w, float grid_size_l, float grid_size_h)
@@ -497,21 +481,6 @@ __device__ int MapIntersectionToEnvMap(float3 coord, float world_size, float3 wo
 	(gradient)[2] = 0; \
 }
 
-/*
-#define GetGradient(gradient, x, y, z) \
-if ((((x)-4.45665)*((x)-4.45665) + ((y)-3.9382) * ((y)-3.9382) + ((z)-4.57365) * ((z)-4.57365)) < 0.9*0.9) \
-{\
-	(gradient)[0] = 2 * ((x)-4.45665) / N_COEFFICIENT; \
-	(gradient)[1] = 2 * ((x)-3.9382) / N_COEFFICIENT; \
-	(gradient)[2] = 2 * ((x)-4.57365); \
-}\
-else\
-{\
-	(gradient)[0] = 2 * ((x)-5.57505) / N_COEFFICIENT; \
-	(gradient)[1] = 2 * ((x)-2.1220) / N_COEFFICIENT; \
-	(gradient)[2] = 2 * ((x)-5.33565); \
-}
-*/
 //((((x)-4.45665)*((x)-4.45665) + ((y)-3.9382) * ((y)-3.9382) + ((z)-4.57365) * ((z)-4.57365)) / N_COEFFICIENT + 1.0) : \
 //((((x)-5.57505)*((x)-5.57505) + ((y)-2.1220) * ((y)-2.1220) + ((z)-5.33565) * ((z)-5.33565)) / N_COEFFICIENT + 1.0)
 #endif

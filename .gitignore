@@ -1,4 +1,5 @@
 objs/
+Release/
 Debug/
 src/bak/
 *.user
