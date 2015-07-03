@@ -26,7 +26,7 @@
 
 #include "timingUtils.h"
 #include "commoninclude.h"
-#include "rasterizeKernels.h"
+//#include "rasterizeKernels.h"
 #include "utilities.h"
 #include "sceneStructs.h"
 #include "voxelization.h"
