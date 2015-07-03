@@ -1,0 +1,14 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdftex 2015.3.30)  30 MAR 2015 11:16
+entering extended mode
+**C:/Users/ying/privateftp/report/inter_eco/bib.bib
+(C:/Users/ying/privateftp/report/inter_eco/bib.bib
+! Undefined control sequence.
+l.5 howpublished={\url
+                      {http://en.wikipedia.org/wiki/Ebola_virus_disease}},
+? 
+! Emergency stop.
+l.5 howpublished={\url
+                      {http://en.wikipedia.org/wiki/Ebola_virus_disease}},
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

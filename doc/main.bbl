@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{citation:paper}
+{Sun, X., Zhou, K., Stollnitz, E., Shi, J., Guo, B.}, ``Interactive relighting
+  of dynamic refractive objects,'' {\em ACM Trans. Graph. 27, 3}, August 2008.
+
+\bibitem{citation:voxelpipe}
+{Jacopo Pantaleoni}, ``Voxelpipe: A programmable pipeline for 3d
+  voxelization,'' {\em High Performance Graphics}, August 2011.
+
+\bibitem{citation:color}
+{CHET S. HAASE and GARY W. MEYER}, ``Modeling pigmented materials for realistic
+  image synthesis,'' {\em ACM Trans. Graph. 11, 4}, 1992.
+
+\end{thebibliography}
